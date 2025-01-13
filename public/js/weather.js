@@ -25,4 +25,8 @@ async function getForecast(location, days = 3) {
         if (!response.ok) {
             throw new Error('Failed to fetch forecast data');
         }
+    } catch (error) {
+        console.error('Error fetching forecast data:', error);
+    }
+}
        

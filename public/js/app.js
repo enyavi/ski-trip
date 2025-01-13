@@ -69,7 +69,7 @@ const stations = [
 
 document.addEventListener('DOMContentLoaded', async () => {
     const stations = [
-        { name: 'Station 1', location: 'Luz Ardiden' },
+        { name: 'Station 1', location: 'Arreau' },
         { name: 'Station 2', location: 'Saint-Lary-Soulan' },
         { name: 'Station 3', location: 'Peyragudes' },
         { name: 'Station 4', location: 'Piau Engaly' },
