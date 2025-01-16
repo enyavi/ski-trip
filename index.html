@@ -3,61 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ski Trip Planner</title>
+  <title>Lokalito Ski Trip</title>
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjef5LPJpnTuyq1sbBDKTkK9TGCyCV--Y&libraries=visualization"></script>
 </head>
 <body>
-  <header>
-    <h1>Ski Trip Planner</h1>
-  </header>
+  <h1>Our Ski Trip to the French Pyrenees</h1>
+  <div id="stations-container"></div> <!-- Contenedor de tarjetas -->
 
-  <main>
-    <section id="summary">
-      <h2>Daily Summary</h2>
-      <div id="stations">
-        <!-- Cards for 5 stations -->
-        <div class="card" id="station1">
-          <h3>Station 1</h3>
-          <p id="station1-weather">Weather: Loading...</p>
-          <p id="station1-traffic">Travel time: Loading...</p>
-          <div id="station1-map" class="map"></div>
-        </div>
-        <div class="card" id="station2">
-          <h3>Station 2</h3>
-          <p id="station2-weather">Weather: Loading...</p>
-          <p id="station2-traffic">Travel time: Loading...</p>
-          <div id="station2-map" class="map"></div>
-        </div>
-        <div class="card" id="station3">
-          <h3>Station 3</h3>
-          <p id="station3-weather">Weather: Loading...</p>
-          <p id="station3-traffic">Travel time: Loading...</p>
-          <div id="station3-map" class="map"></div>
-        </div>
-        <div class="card" id="station4">
-          <h3>Station 4</h3>
-          <p id="station4-weather">Weather: Loading...</p>
-          <p id="station4-traffic">Travel time: Loading...</p>
-          <div id="station4-map" class="map"></div>
-        </div>
-        <div class="card" id="station5">
-          <h3>Station 5</h3>
-          <p id="station5-weather">Weather: Loading...</p>
-          <p id="station5-traffic">Travel time: Loading...</p>
-          <div id="station5-map" class="map"></div>
-        </div>
-      </div>
-      <div id="weather-cards" class="weather-cards"></div>
-      <button id="update">Update Data</button>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 Ski Trip Planner</p>
-  </footer>
-
-  <script src="js/weather.js"></script>
-  <script src="js/app.js"></script>
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>

@@ -29,4 +29,7 @@ async function getForecast(location, days = 3) {
         console.error('Error fetching forecast data:', error);
     }
 }
+
+// Export constants and functions
+export { getCurrentWeather };
        
