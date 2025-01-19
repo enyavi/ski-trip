@@ -63,6 +63,7 @@ function updateCardWithRouteInfo(card, place, routeData) {
         durationElement.textContent = duration;
 
         initMap(place, route.polyline.encodedPolyline, HOME.coordinates);
+
     } else {
         distanceElement.textContent = "Error fetching route";
         durationElement.textContent = "Error fetching route";
@@ -77,9 +78,9 @@ window.initMap = function(place, encodedPolyline, centerCoordinates) {
     }
 
   // Create the map centered at a default location
-  const map = new google.maps.Map(document.getElementById(mapContainer), {
+  const map = new google.maps.Map(mapContainer, {
     center: { lat: centerCoordinates.latitude, lng: centerCoordinates.longitude },
-    zoom: 12,
+    zoom: 50,
   });
 
   if (!encodedPolyline) {
@@ -95,17 +96,35 @@ window.initMap = function(place, encodedPolyline, centerCoordinates) {
     }
     
 
-  // Draw the polyline on the map
-  const polyline = new google.maps.Polyline({
-    path: decodedPath,
-    geodesic: true,
-    strokeColor: "#FF0000",
-    strokeOpacity: 1.0,
-    strokeWeight: 2,
-  });
+    const polyline = new google.maps.Polyline({
+      path: decodedPath,
+      geodesic: true,
+      strokeColor: "#00FF00", // Puede ser verde si no hay tráfico
+      strokeOpacity: 1.0,
+      strokeWeight: 4,
+    });
 
   // Set the polyline on the map
   polyline.setMap(map);
+
+  // Crea y agrega la capa de tráfico
+const trafficLayer = new google.maps.TrafficLayer();
+trafficLayer.setMap(map);
+
+  // Add origin and destination markers
+  const originMarker = new google.maps.Marker({
+    position: decodedPath[0], // Origen
+    map: map,
+    title: "Origin",
+    icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+  });
+
+  const destinationMarker = new google.maps.Marker({
+    position: decodedPath[decodedPath.length - 1], // Destino
+    map: map,
+    title: "Destination",
+    icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+  });
 
   // Adjust the viewport to fit the polyline
   const bounds = new google.maps.LatLngBounds();
