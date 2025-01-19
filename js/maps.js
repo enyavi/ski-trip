@@ -1,31 +1,24 @@
 // maps.js
 
 // Constants for places (coordinates, names, etc.)
+const HOME = {
+    name: "Arreau (Base)",
+    coordinates: { latitude: 42.9076, longitude: 0.3443 },
+    id: "arreau-base"
+}
+
 const PLACES = [
     {
-        name: "Saint-Lary-Soulan",
-        coordinates: { latitude: 42.8165, longitude: 0.3227 },
+        name: "Saint-Lary Espiuabe 1600",
+        coordinates: { latitude: 42.8256, longitude: 0.2601 },
         id: "saint-lary",
         url: "https://www.infonieve.es/estacion-esqui/saint-lary/"
-    },
-    {
-        name: "Arreau (Base)",
-        coordinates: { latitude: 42.9076, longitude: 0.3443 },
-        id: "arreau-base"
-    },
+    }
 ];
 
 // Function to get place by name
 function getPlaceByName(name) {
     return PLACES.find((place) => place.name === name);
-}
-
-// Function to initialize Google Maps
-function initializeMap(containerId, centerCoordinates, zoomLevel = 10) {
-    return new google.maps.Map(document.getElementById(containerId), {
-        center: centerCoordinates,
-        zoom: zoomLevel,
-    });
 }
 
 // Function to fetch route details using Google Routes API
@@ -61,5 +54,7 @@ async function fetchRoute(origin, destination, apiKey) {
     }
 }
 
+
+
 // Export constants and functions
-export { PLACES, getPlaceByName, initializeMap, fetchRoute };
+export { HOME,PLACES, getPlaceByName, fetchRoute };

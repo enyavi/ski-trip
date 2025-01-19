@@ -1,4 +1,4 @@
-import { PLACES, getPlaceByName, fetchRoute } from "./maps.js";
+import { HOME, PLACES, getPlaceByName, fetchRoute } from "./maps.js";
 import { getCurrentWeather } from "./weather.js"; // Asegúrate de que weather.js está configurado
 
 // Base configuration
@@ -10,22 +10,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     PLACES.forEach(async (place) => {
         const card = createStationCard(place);
+        //const mapCard = createMapCard(place);
         stationsContainer.appendChild(card);
 
         // Obtén la ruta y el clima para cada estación
-        const basePlace = getPlaceByName("Arreau (Base)");
-
-        // Obtén la ruta de Arreau a la estación
-        const routeData = await fetchRoute(basePlace.coordinates, place.coordinates, gApiKey);
-
-        // Actualiza la tarjeta con los datos de la ruta
-        updateCardWithRouteInfo(card, routeData);
+        const basePlace = HOME;
 
         // Obtén el clima de la estación
         const weatherData = await getCurrentWeather(place.coordinates.latitude, place.coordinates.longitude);
 
         // Actualiza la tarjeta con el clima
         updateCardWithWeatherInfo(card, weatherData);
+
+        // Obtén la ruta de Arreau a la estación
+        const routeData = await fetchRoute(basePlace.coordinates, place.coordinates, gApiKey);
+
+        // Actualiza la tarjeta con los datos de la ruta
+        updateCardWithRouteInfo(card, place, routeData);
     });
 });
 
@@ -42,28 +43,86 @@ function createStationCard(place) {
         <p><strong>Weather:</strong> <span class="weather">Loading...</span></p>
         <p><strong>Web:</strong> <a class="weather" href="${place.url}" target="_blank" rel="noopener noreferrer">${place.url}</a></p>
         <div class="map" id="${place.id}-map" style="width: 100%; height: 150px;"></div>
-    `;
+        `;
 
+    console.log("Generated card:", card); 
     return card;
 }
 
 // Función para actualizar la tarjeta con información de la ruta
-function updateCardWithRouteInfo(card, routeData) {
+function updateCardWithRouteInfo(card, place, routeData) {
     const distanceElement = card.querySelector(".distance");
     const durationElement = card.querySelector(".duration");
 
     if (routeData && routeData.routes && routeData.routes[0]) {
         const route = routeData.routes[0];
         const distance = (route.distanceMeters / 1000).toFixed(2) + " km";
-        const duration = Math.round(route.duration / 60) + " minutes";
+        const duration = formatDuration(route.duration)
 
         distanceElement.textContent = distance;
         durationElement.textContent = duration;
+
+        initMap(place, route.polyline.encodedPolyline, HOME.coordinates);
     } else {
         distanceElement.textContent = "Error fetching route";
         durationElement.textContent = "Error fetching route";
     }
 }
+
+window.initMap = function(place, encodedPolyline, centerCoordinates) {
+  const mapContainer = document.getElementById(`${place.id}-map`);
+    if (!mapContainer) {
+        console.error(`Map container not found for place: ${place.id}`);
+        return;
+    }
+
+  // Create the map centered at a default location
+  const map = new google.maps.Map(document.getElementById(mapContainer), {
+    center: { lat: centerCoordinates.latitude, lng: centerCoordinates.longitude },
+    zoom: 12,
+  });
+
+  if (!encodedPolyline) {
+      console.error("Encoded polyline is undefined or empty:", encodedPolyline);
+      return;
+  }
+
+  // Decode the polyline
+  try {
+      var decodedPath = google.maps.geometry.encoding.decodePath(encodedPolyline);
+    } catch (error) {
+      console.error("Error decoding polyline:", error);
+    }
+    
+
+  // Draw the polyline on the map
+  const polyline = new google.maps.Polyline({
+    path: decodedPath,
+    geodesic: true,
+    strokeColor: "#FF0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+
+  // Set the polyline on the map
+  polyline.setMap(map);
+
+  // Adjust the viewport to fit the polyline
+  const bounds = new google.maps.LatLngBounds();
+  decodedPath.forEach((point) => bounds.extend(point));
+  map.fitBounds(bounds);
+}
+
+function formatDuration(durationString) {
+  // Eliminar la 's' final y convertir a número
+  const seconds = parseInt(durationString.replace('s', ''), 10);
+
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+
+  return `${hours > 0 ? hours + 'h ' : ''}${minutes}min`;
+}
+
 
 // Función para actualizar la tarjeta con el clima
 function updateCardWithWeatherInfo(card, weatherData) {

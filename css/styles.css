@@ -52,15 +52,6 @@ footer {
   font-size: 12px;
 }
 
-.map {
-  width: 100%;
-  height: 150px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
 .weather-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -79,5 +70,12 @@ footer {
 .weather-card img {
   max-width: 50px;
   margin-top: 0.5rem;
+}
+
+.map {
+  width: 100%;
+  height: 150px; /* Asegúrate de definir la altura */
+  border: 1px solid #ddd; /* Opcional, para visualizar el contenedor */
+  margin-top: 10px; /* Espaciado opcional */
 }
 
