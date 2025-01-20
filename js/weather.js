@@ -4,8 +4,8 @@ const apiKey = '18ed1cd4ccb74736b28214215251301';
 const baseUrl = 'https://api.weatherapi.com/v1';
 
 // Function to fetch current weather
-async function getCurrentWeather(location) {
-    const endpoint = `${baseUrl}/current.json?key=${apiKey}&q=${location}&aqi=no`;
+async function getCurrentWeather(latitude, longitude) {
+    const endpoint = `${baseUrl}/current.json?key=${apiKey}&q=${latitude},${longitude}&aqi=no`;
     try {
         const response = await fetch(endpoint);
         if (!response.ok) {
