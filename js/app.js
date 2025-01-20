@@ -38,9 +38,9 @@ function createStationCard(place) {
 
     card.innerHTML = `
         <h3>${place.name}</h3>
-        <p><strong>Distance:</strong> <span class="distance">Loading...</span></p>
-        <p><strong>Duration:</strong> <span class="duration">Loading...</span></p>
-        <p><strong>Weather:</strong> <span class="weather">Loading...</span></p>
+        <p><strong>Distancia:</strong> <span class="distance">Loading...</span></p>
+        <p><strong>Tiempo de viaje:</strong> <span class="duration">Loading...</span></p>
+        <p><strong>Clima:</strong> <span class="weather">Loading...</span></p>
         <p><strong>Web:</strong> <a class="weather" href="${place.url}" target="_blank" rel="noopener noreferrer">${place.url}</a></p>
         <div class="map" id="${place.id}-map" style="width: 100%; height: 150px;"></div>
         `;
@@ -72,15 +72,15 @@ function updateCardWithRouteInfo(card, place, routeData) {
 
 window.initMap = function(place, encodedPolyline, centerCoordinates) {
   const mapContainer = document.getElementById(`${place.id}-map`);
-    if (!mapContainer) {
-        console.error(`Map container not found for place: ${place.id}`);
-        return;
-    }
+  if (!mapContainer) {
+      console.error(`Map container not found for place: ${place.id}`);
+      return;
+  }
 
   // Create the map centered at a default location
   const map = new google.maps.Map(mapContainer, {
     center: { lat: centerCoordinates.latitude, lng: centerCoordinates.longitude },
-    zoom: 50,
+    zoom: 12,
   });
 
   if (!encodedPolyline) {
@@ -90,26 +90,25 @@ window.initMap = function(place, encodedPolyline, centerCoordinates) {
 
   // Decode the polyline
   try {
-      var decodedPath = google.maps.geometry.encoding.decodePath(encodedPolyline);
-    } catch (error) {
-      console.error("Error decoding polyline:", error);
-    }
+    var decodedPath = google.maps.geometry.encoding.decodePath(encodedPolyline);
+  } catch (error) {
+    console.error("Error decoding polyline:", error);
+  }
     
-
-    const polyline = new google.maps.Polyline({
-      path: decodedPath,
-      geodesic: true,
-      strokeColor: "#00FF00", // Puede ser verde si no hay tráfico
-      strokeOpacity: 1.0,
-      strokeWeight: 4,
-    });
+  const polyline = new google.maps.Polyline({
+    path: decodedPath,
+    geodesic: true,
+    strokeColor: "#00FF00", // Puede ser verde si no hay tráfico
+    strokeOpacity: 1.0,
+    strokeWeight: 4,
+  });
 
   // Set the polyline on the map
   polyline.setMap(map);
 
   // Crea y agrega la capa de tráfico
-const trafficLayer = new google.maps.TrafficLayer();
-trafficLayer.setMap(map);
+  const trafficLayer = new google.maps.TrafficLayer();
+  trafficLayer.setMap(map);
 
   // Add origin and destination markers
   const originMarker = new google.maps.Marker({
@@ -126,9 +125,15 @@ trafficLayer.setMap(map);
     icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
   });
 
-  // Adjust the viewport to fit the polyline
+  // Ajustar el zoom para encuadrar origen y destino
   const bounds = new google.maps.LatLngBounds();
+  bounds.extend(decodedPath[0]); // Agregar el origen
+  bounds.extend(decodedPath[decodedPath.length - 1]); // Agregar el destino
+
+  // Si deseas incluir toda la polilínea en el zoom:
   decodedPath.forEach((point) => bounds.extend(point));
+
+  // Ajustar el mapa a los límites
   map.fitBounds(bounds);
 }
 
