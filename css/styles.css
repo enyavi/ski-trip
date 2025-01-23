@@ -72,10 +72,53 @@ footer {
   margin-top: 0.5rem;
 }
 
+/* Container para cada fila */
+.station-row {
+  margin-bottom: 30px;
+}
+
+.station-row h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Contenedor de las dos tarjetas */
+.station-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+/* Tarjetas individuales */
+.station-card {
+  flex: 1; /* Ambas tarjetas ocupan el mismo ancho */
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 20px;
+  color: white;
+  height: 250px; /* Tamaño ajustado */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.weather-card {
+  background: linear-gradient(135deg, #4a90e2, #50c3dd);
+}
+
+.map-card {
+  background: #eaeaea;
+  color: #333;
+}
+
+/* Map styles */
 .map {
-  width: 100%;
-  height: 150px; /* Asegúrate de definir la altura */
-  border: 1px solid #ddd; /* Opcional, para visualizar el contenedor */
-  margin-top: 10px; /* Espaciado opcional */
+  height: 100%;
+  border-radius: 8px;
+}
+
+/* Map styles */
+.map {
+  height: 100%;
+  border-radius: 8px;
 }
 

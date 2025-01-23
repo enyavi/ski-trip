@@ -9,6 +9,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const stationsContainer = document.getElementById("stations-container");
 
     PLACES.forEach(async (place) => {
+        
+        updateStationName(place.name, place.id);
+
+
+
         const card = createStationCard(place);
         //const mapCard = createMapCard(place);
         stationsContainer.appendChild(card);
@@ -20,15 +25,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         const weatherData = await getCurrentWeather(place.coordinates.latitude, place.coordinates.longitude);
 
         // Actualiza la tarjeta con el clima
-        updateCardWithWeatherInfo(card, weatherData);
+        updateCardWithWeatherInfo(place.id, card, weatherData);
 
         // Obtén la ruta de Arreau a la estación
         const routeData = await fetchRoute(basePlace.coordinates, place.coordinates, gApiKey);
 
         // Actualiza la tarjeta con los datos de la ruta
         updateCardWithRouteInfo(card, place, routeData);
+
+        // Inicializa el mapa
+        initMap(place.id, { lat: place.latitude, lng: place.longitude });
     });
+
+    
 });
+
+function updateStationName(name, stationId) {
+  const titleElement = document.querySelector(`#station-${stationId}-name`);
+  titleElement.textContent = name;
+}
 
 // Función para crear una tarjeta de estación
 function createStationCard(place) {
@@ -71,7 +86,7 @@ function updateCardWithRouteInfo(card, place, routeData) {
 }
 
 window.initMap = function(place, encodedPolyline, centerCoordinates) {
-  const mapContainer = document.getElementById(`${place.id}-map`);
+  const mapContainer = document.getElementById(`station-${place.id}-map`);
   if (!mapContainer) {
       console.error(`Map container not found for place: ${place.id}`);
       return;
@@ -149,7 +164,7 @@ function formatDuration(durationString) {
 
 
 // Función para actualizar la tarjeta con el clima
-function updateCardWithWeatherInfo(card, weatherData) {
+function updateCardWithWeatherInfo(stationId, card, weatherData) {
     const weatherElement = card.querySelector(".weather");
 
     if (weatherData && weatherData.current) {
@@ -160,4 +175,27 @@ function updateCardWithWeatherInfo(card, weatherData) {
     } else {
         weatherElement.textContent = "Error fetching weather";
     }
+
+    updateWeatherCard(stationId, weatherData);
+
+
+}
+
+function updateWeatherCard(stationId, weatherData) {
+  const weatherCard = document.querySelector(`#station-${stationId}-weather`);
+  if (weatherCard && weatherData) {
+      const temperature = `${weatherData.current.temp_c}°C`;
+      const condition = weatherData.current.condition.text;
+      const iconUrl = weatherData.current.condition.icon;
+
+      weatherCard.innerHTML = `
+          <div class="weather-info">
+              <img src="https:${iconUrl}" alt="${condition}">
+              <div>
+                  <div class="temp">${temperature}</div>
+                  <div class="condition">${condition}</div>
+              </div>
+          </div>
+      `;
+  }
 }

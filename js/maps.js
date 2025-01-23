@@ -11,25 +11,25 @@ const PLACES = [
     {
         name: "Saint-Lary Espiuabe 1600",
         coordinates: { latitude: 42.8256, longitude: 0.2601 },
-        id: "saint-lary",
+        id: "s1",
         url: "https://www.infonieve.es/estacion-esqui/saint-lary/"
     },
     {
         name: "Peyragudes",
         coordinates: { latitude: 42.7912, longitude: 0.4464 },
-        id: "peyragudes",
+        id: "s2",
         url: "https://www.infonieve.es/estacion-esqui/peyragudes/parte-de-nieve/"
     },
     {
         name: "Piau Engaly",
         coordinates: { latitude: 42.7839, longitude: 0.1586 },
-        id: "piau-engaly",
+        id: "s3",
         url: "https://www.infonieve.es/estacion-esqui/piau-engaly/"
     },
     {
         name: "Superbagneres",
         coordinates: { latitude: 42.7683, longitude: 0.5771 },
-        id: "superbagneres",
+        id: "s4",
         url: "https://www.infonieve.es/estacion-esqui/luchon-superbagneres/"
     }
 ];
