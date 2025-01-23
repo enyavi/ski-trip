@@ -1,5 +1,5 @@
 import { HOME, PLACES, getPlaceByName, fetchRoute } from "./maps.js";
-import { getCurrentWeather } from "./weather.js"; // Asegúrate de que weather.js está configurado
+import { getCurrentWeather, getForecast } from "./weather.js"; // Asegúrate de que weather.js está configurado
 
 // Base configuration
 const gApiKey='AIzaSyCjef5LPJpnTuyq1sbBDKTkK9TGCyCV--Y';
@@ -22,10 +22,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         const basePlace = HOME;
 
         // Obtén el clima de la estación
-        const weatherData = await getCurrentWeather(place.coordinates.latitude, place.coordinates.longitude);
+        //const weatherData = await getCurrentWeather(place.coordinates.latitude, place.coordinates.longitude);
+        const forecastData = await getForecast(place.coordinates.latitude, place.coordinates.longitude, 3);
 
         // Actualiza la tarjeta con el clima
-        updateCardWithWeatherInfo(place.id, card, weatherData);
+        updateWeatherCard(place.id, forecastData)
 
         // Obtén la ruta de Arreau a la estación
         const routeData = await fetchRoute(basePlace.coordinates, place.coordinates, gApiKey);
@@ -164,31 +165,20 @@ function formatDuration(durationString) {
   return `${hours > 0 ? hours + 'h ' : ''}${minutes}min`;
 }
 
-
-// Función para actualizar la tarjeta con el clima
-function updateCardWithWeatherInfo(stationId, card, weatherData) {
-    const weatherElement = card.querySelector(".weather");
-
-    if (weatherData && weatherData.current) {
-        const temperature = weatherData.current.temp_c + "°C";
-        const condition = weatherData.current.condition.text;
-
-        weatherElement.textContent = `${temperature}, ${condition}`;
-    } else {
-        weatherElement.textContent = "Error fetching weather";
-    }
-
-    updateWeatherCard(stationId, weatherData);
-
-
-}
-
 function updateWeatherCard(stationId, weatherData) {
   const weatherCard = document.querySelector(`#station-${stationId}-weather`);
   if (weatherCard && weatherData) {
-      const temperature = `${weatherData.current.temp_c}°C`;
-      const condition = weatherData.current.condition.text;
-      const iconUrl = weatherData.current.condition.icon;
+
+    //current
+    const temperature = `${weatherData.current.temp_c}°C`;
+    const condition = weatherData.current.condition.text;
+    const wind = weatherData.current.wind_kph;
+    const wind_dir = weatherData.current.wind_dir;
+    const iconUrl = weatherData.current.condition.icon;
+
+    const maxtemp = `${weatherData.forecast.forecastday[0].day.maxtemp_c}°C`;
+    const mintemp = `${weatherData.forecast.forecastday[0].day.mintemp_c}°C`;
+
 
       weatherCard.innerHTML = `
           <div class="weather-info">
@@ -196,6 +186,9 @@ function updateWeatherCard(stationId, weatherData) {
               <div>
                   <div class="temp">${temperature}</div>
                   <div class="condition">${condition}</div>
+                  <div class="wind">${wind} kmh (${wind_dir}) </div>
+                  <div class="condition"><img src="assets/icons/icons8-arriba-32.png" alt="Up icon" class="icon">${maxtemp}</div>
+                  <div class="condition"><img src="assets/icons/icons8-abajo-32.png" alt="Up icon" class="icon">${mintemp}</div>
               </div>
           </div>
       `;

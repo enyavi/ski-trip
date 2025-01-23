@@ -18,18 +18,19 @@ async function getCurrentWeather(latitude, longitude) {
 }
 
 // Function to fetch forecast
-async function getForecast(location, days = 3) {
-    const endpoint = `${baseUrl}/forecast.json?key=${apiKey}&q=${location}&days=${days}&aqi=no&alerts=no`;
+async function getForecast(latitude, longitude, days = 3) {
+    const endpoint = `${baseUrl}/forecast.json?key=${apiKey}&q=${latitude},${longitude}&days=${days}&aqi=no&alerts=no`;
     try {
         const response = await fetch(endpoint);
         if (!response.ok) {
             throw new Error('Failed to fetch forecast data');
         }
+        return await response.json();
     } catch (error) {
         console.error('Error fetching forecast data:', error);
     }
 }
 
 // Export constants and functions
-export { getCurrentWeather };
+export { getCurrentWeather, getForecast};
        
