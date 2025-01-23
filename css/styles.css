@@ -110,15 +110,39 @@ footer {
   color: #333;
 }
 
-/* Map styles */
-.map {
-  height: 100%;
-  border-radius: 8px;
-}
 
 /* Map styles */
 .map {
-  height: 100%;
+  height: calc(100% - 40px); /* Ajusta el mapa para dejar espacio al texto */
   border-radius: 8px;
+}
+
+/* Contenedor del icono y tiempo */
+.map-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Icono del coche */
+.map-info .icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+/* Tiempo de la ruta */
+.map-info .route-time {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.map-info .route-distance {
+  font-size: 1.1rem;
+  color: #555;
 }
 

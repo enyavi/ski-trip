@@ -32,9 +32,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Actualiza la tarjeta con los datos de la ruta
         updateCardWithRouteInfo(card, place, routeData);
-
-        // Inicializa el mapa
-        initMap(place.id, { lat: place.latitude, lng: place.longitude });
     });
 
     
@@ -66,15 +63,20 @@ function createStationCard(place) {
 
 // Función para actualizar la tarjeta con información de la ruta
 function updateCardWithRouteInfo(card, place, routeData) {
-    const distanceElement = card.querySelector(".distance");
-    const durationElement = card.querySelector(".duration");
+    const mapCardElement = document.querySelector(`#station-${place.id}-map-card`);
+    const durationElement = mapCardElement.querySelector(".route-time")
+    const distanceElement = mapCardElement.querySelector(".route-distance")
+
+
+    //const distanceElement = card.querySelector(".distance");
+    //const durationElement = card.querySelector(".duration");
 
     if (routeData && routeData.routes && routeData.routes[0]) {
         const route = routeData.routes[0];
         const distance = (route.distanceMeters / 1000).toFixed(2) + " km";
         const duration = formatDuration(route.duration)
 
-        distanceElement.textContent = distance;
+        distanceElement.textContent = `(${distance})`;
         durationElement.textContent = duration;
 
         initMap(place, route.polyline.encodedPolyline, HOME.coordinates);
