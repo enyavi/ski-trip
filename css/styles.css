@@ -59,18 +59,7 @@ footer {
   margin: 2rem 0;
 }
 
-.weather-card {
-  padding: 1rem;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
 
-.weather-card img {
-  max-width: 50px;
-  margin-top: 0.5rem;
-}
 
 /* Container para cada fila */
 .station-row {
@@ -101,9 +90,7 @@ footer {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.weather-card {
-  background: linear-gradient(135deg, #4a90e2, #50c3dd);
-}
+
 
 .map-card {
   background: #eaeaea;
@@ -134,6 +121,8 @@ footer {
   margin-right: 10px;
 }
 
+
+
 /* Tiempo de la ruta */
 .map-info .route-time {
   font-weight: bold;
@@ -145,4 +134,73 @@ footer {
   font-size: 1.1rem;
   color: #555;
 }
+
+.condition {
+  display: flex; /* Alinea icono y texto en una fila */
+  align-items: center; /* Centra verticalmente el contenido */
+  gap: 2px; /* Espaciado entre el icono y el texto */
+  font-size: 0.9rem; /* Tamaño del texto ajustable */
+  color: white; /* Color del texto */
+}
+
+.arrow-icon {
+  width: 16px;
+  height: 16px;
+  filter: invert(100%); /* Invierte el color del icono */
+}
+
+.temp{
+  font-size: inherit;
+  line-height: 1;
+  font-weight: normal;
+}
+
+.current-temp{
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+.weather-info {
+  display: flex;
+  justify-content: space-between; /* Alinea izquierda y derecha */
+  align-items: flex-start; 
+  gap: 16px; /* Espaciado entre las secciones */
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;;
+  align-items: flex-start;
+  gap: 2px; /* Espaciado entre el icono y los detalles */
+}
+
+.right-section {
+  display: flex;
+  flex-direction: column; /* Flechas y temperaturas en una columna */
+  align-items: flex-end; /* Alinea a la derecha */
+  gap: 4px; /* Espaciado entre flechas y temperaturas */
+}
+
+
+
+.details {
+  display: flex;
+  flex-direction: column; /* Alinea detalles verticalmente */
+}
+
+.weather-card {
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #4a90e2, #50c3dd);
+}
+
+.weather-icon {
+  width: 32px; /* Tamaño del icono del clima */
+  height: 32px;
+}
+
+
+
 

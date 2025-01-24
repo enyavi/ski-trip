@@ -182,15 +182,32 @@ function updateWeatherCard(stationId, weatherData) {
 
       weatherCard.innerHTML = `
           <div class="weather-info">
-              <img src="https:${iconUrl}" alt="${condition}">
-              <div>
-                  <div class="temp">${temperature}</div>
-                  <div class="condition">${condition}</div>
-                  <div class="wind">${wind} kmh (${wind_dir}) </div>
-                  <div class="condition"><img src="assets/icons/icons8-arriba-32.png" alt="Up icon" class="icon">${maxtemp}</div>
-                  <div class="condition"><img src="assets/icons/icons8-abajo-32.png" alt="Up icon" class="icon">${mintemp}</div>
+            <div class="left-section">
+              <div class="details">
+                <div class="current-temp">${temperature}</div>
               </div>
+              <img class="weather-icon" src="https:${iconUrl}" alt="${condition}">
+            </div>
+            <div class = "right-section">
+              <div class="condition">
+                <img src="assets/icons/icons8-arriba-32.png" alt="Up icon" class="arrow-icon">
+                <span class="temp">${maxtemp}</span>
+              </div>
+              <div class="condition">
+                <img src="assets/icons/icons8-abajo-32.png" alt="Up icon" class="arrow-icon">
+                <span class="temp">${mintemp}</span>
+              </div>
+            </div>
+            <div class="left-section">
+              <div class="details">
+                <div class="wind">${wind} kmh (${wind_dir}) </div>
+              </div>
+            </div>
+            <div class="right-section">
+            </div>
           </div>
       `;
+
+      //<div class="condition">${condition}</div>
   }
 }
