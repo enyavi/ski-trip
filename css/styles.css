@@ -1,9 +1,24 @@
+/* Estilos generales */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
   color: #333;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px auto; /* Centrado horizontalmente */
+  padding: 15px 30px; /* Espaciado interno */
+  background-color: #ffffff; /* Fondo blanco */
+  color: #333; /* Color del texto */
+  border-radius: 20px; /* Bordes redondeados */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  font-size: 2rem; /* Tamaño de fuente */
+  font-weight: bold; /* Texto en negrita */
+  max-width: 80%; /* Ancho máximo para que no ocupe toda la pantalla */
+  border: 1px solid #e0e0e0; /* Borde sutil */
 }
 
 header {
@@ -59,8 +74,6 @@ footer {
   margin: 2rem 0;
 }
 
-
-
 /* Container para cada fila */
 .station-row {
   margin-bottom: 30px;
@@ -90,13 +103,10 @@ footer {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-
-
 .map-card {
   background: #eaeaea;
   color: #333;
 }
-
 
 /* Map styles */
 .map {
@@ -120,8 +130,6 @@ footer {
   height: 24px;
   margin-right: 10px;
 }
-
-
 
 /* Tiempo de la ruta */
 .map-info .route-time {
@@ -149,13 +157,13 @@ footer {
   filter: invert(100%); /* Invierte el color del icono */
 }
 
-.temp{
+.temp {
   font-size: inherit;
   line-height: 1;
   font-weight: normal;
 }
 
-.current-temp{
+.current-temp {
   font-size: 2rem;
   font-weight: normal;
 }
@@ -163,13 +171,13 @@ footer {
 .weather-info {
   display: flex;
   justify-content: space-between; /* Alinea izquierda y derecha */
-  align-items: flex-start; 
+  align-items: flex-start;
   gap: 16px; /* Espaciado entre las secciones */
 }
 
 .left-section {
   display: flex;
-  flex-direction: column;;
+  flex-direction: column;
   align-items: flex-start;
   gap: 2px; /* Espaciado entre el icono y los detalles */
 }
@@ -180,8 +188,6 @@ footer {
   align-items: flex-end; /* Alinea a la derecha */
   gap: 4px; /* Espaciado entre flechas y temperaturas */
 }
-
-
 
 .details {
   display: flex;
@@ -201,6 +207,44 @@ footer {
   height: 32px;
 }
 
+/* Estilos del carrusel */
+.carousel {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
 
+/* Contenedor de diapositivas */
+.slides-container {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
 
+/* Estilos de cada diapositiva */
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+}
 
+/* Indicadores circulares */
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.indicator.active {
+  background-color: #333;
+}

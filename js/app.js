@@ -6,17 +6,17 @@ const gApiKey='AIzaSyCjef5LPJpnTuyq1sbBDKTkK9TGCyCV--Y';
 
 document.addEventListener("DOMContentLoaded", async () => {
     // Genera las tarjetas para cada estación
-    const stationsContainer = document.getElementById("stations-container");
+    const slidesContainer = document.querySelector(".slides-container");
 
     PLACES.forEach(async (place) => {
         
         updateStationName(place.name, place.id);
 
-
+        console.log(slidesContainer);
 
         const card = createStationCard(place);
         //const mapCard = createMapCard(place);
-        stationsContainer.appendChild(card);
+        slidesContainer.appendChild(card);
 
         // Obtén la ruta y el clima para cada estación
         const basePlace = HOME;
@@ -211,3 +211,55 @@ function updateWeatherCard(stationId, weatherData) {
       //<div class="condition">${condition}</div>
   }
 }
+
+// Seleccionar elementos del DOM
+const slidesContainer = document.querySelector(".slides-container");
+const indicators = document.querySelectorAll(".indicator");
+
+let currentIndex = 0;
+let startX = 0;
+let isDragging = false;
+
+// Función para mover el carrusel
+const moveSlide = (index) => {
+  const slideWidth = slidesContainer.children[0].clientWidth;
+  slidesContainer.style.transform = `translateX(-${index * slideWidth}px)`;
+  updateIndicators(index);
+};
+
+// Función para actualizar los indicadores
+const updateIndicators = (index) => {
+  indicators.forEach((indicator, i) => {
+    indicator.classList.toggle("active", i === index);
+  });
+};
+
+// Event listeners para los indicadores
+indicators.forEach((indicator, index) => {
+  indicator.addEventListener("click", () => moveSlide(index));
+});
+
+// Navegación táctil
+slidesContainer.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+  isDragging = true;
+});
+
+slidesContainer.addEventListener("touchmove", (e) => {
+  if (!isDragging) return;
+  const currentX = e.touches[0].clientX;
+  const diff = startX - currentX;
+  if (Math.abs(diff) > 50) {
+    if (diff > 0 && currentIndex < slidesContainer.children.length - 1) {
+      currentIndex++;
+    } else if (diff < 0 && currentIndex > 0) {
+      currentIndex--;
+    }
+    moveSlide(currentIndex);
+    isDragging = false;
+  }
+});
+
+slidesContainer.addEventListener("touchend", () => {
+  isDragging = false;
+});

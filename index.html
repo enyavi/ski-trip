@@ -7,79 +7,95 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <h1>Our Ski Trip to the French Pyrenees</h1>
-  <div id="stations-container">
-    <div class="station-row">
+  <h1>Lokalito Ski Trip 2025</h1>
+
+  <!-- Contenedor del carrusel -->
+  <div class="carousel">
+    <!-- Diapositivas -->
+    <div class="slides-container">
+      <!-- Diapositiva 1 -->
+      <div class="slide">
         <h2 id="station-s1-name">Station 1</h2>
         <div class="station-cards">
-            <div class="station-card weather-card">
-                <div id="station-s1-weather" class="weather"></div>
+          <div class="station-card weather-card">
+            <div id="station-s1-weather" class="weather"></div>
+          </div>
+          <div id="station-s1-map-card" class="station-card map-card">
+            <div class="map-info">
+              <img src="assets/icons/icons8-car-30.png" alt="Car icon" class="icon">
+              <span class="route-time">Loading...</span>
+              <span class="route-distance">Loading...</span>
             </div>
-            <div id="station-s1-map-card" class="station-card map-card">
-                  <div class="map-info">
-                    <img src="assets/icons/icons8-car-30.png" alt="Car icon" class="icon">
-                    <span class="route-time">Loading...</span>
-                    <span class="route-distance">Loading...</span>
-                </div>
-                <div id="station-s1-map" class="map"></div>
-            </div>
+            <div id="station-s1-map" class="map"></div>
+          </div>
         </div>
-    </div>
-    
-    <div class="station-row">
+      </div>
+
+      <!-- Diapositiva 2 -->
+      <div class="slide">
         <h2 id="station-s2-name">Station 2</h2>
         <div class="station-cards">
-            <div class="station-card weather-card">
-                <div id="station-s2-weather" class="weather"></div>
+          <div class="station-card weather-card">
+            <div id="station-s2-weather" class="weather"></div>
+          </div>
+          <div id="station-s2-map-card" class="station-card map-card">
+            <div class="map-info">
+              <img src="assets/icons/icons8-car-30.png" alt="Car icon" class="icon">
+              <span class="route-time">Loading...</span>
+              <span class="route-distance">Loading...</span>
             </div>
-            <div id="station-s2-map-card" class="station-card map-card">
-              <div class="map-info">
-                <img src="assets/icons/icons8-car-30.png" alt="Car icon" class="icon">
-                <span class="route-time">Loading...</span>
-                <span class="route-distance">Loading...</span>
-            </div>
-                <div id="station-s2-map" class="map"></div>
-            </div>
+            <div id="station-s2-map" class="map"></div>
+          </div>
         </div>
-    </div>
+      </div>
 
-      <div class="station-row">
+      <!-- Diapositiva 3 -->
+      <div class="slide">
         <h2 id="station-s3-name">Station 3</h2>
         <div class="station-cards">
-            <div class="station-card weather-card">
-                <div id="station-s3-weather" class="weather"></div>
-            </div>
-            <div id="station-s3-map-card" class="station-card map-card">
-              <div class="map-info">
-                <img src="assets/icons/icons8-car-30.png" alt="Car icon" class="icon">
-                <span class="route-time">Loading...</span>
-                <span class="route-distance">Loading...</span>
-            </div>
-                <div id="station-s3-map" class="map"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="station-row">
-      <h2 id="station-s4-name">Station 4</h2>
-      <div class="station-cards">
           <div class="station-card weather-card">
-              <div id="station-s4-weather" class="weather"></div>
+            <div id="station-s3-weather" class="weather"></div>
+          </div>
+          <div id="station-s3-map-card" class="station-card map-card">
+            <div class="map-info">
+              <img src="assets/icons/icons8-car-30.png" alt="Car icon" class="icon">
+              <span class="route-time">Loading...</span>
+              <span class="route-distance">Loading...</span>
+            </div>
+            <div id="station-s3-map" class="map"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diapositiva 4 -->
+      <div class="slide">
+        <h2 id="station-s4-name">Station 4</h2>
+        <div class="station-cards">
+          <div class="station-card weather-card">
+            <div id="station-s4-weather" class="weather"></div>
           </div>
           <div id="station-s4-map-card" class="station-card map-card">
             <div class="map-info">
               <img src="assets/icons/icons8-car-30.png" alt="Car icon" class="icon">
               <span class="route-time">Loading...</span>
               <span class="route-distance">Loading...</span>
+            </div>
+            <div id="station-s4-map" class="map"></div>
           </div>
-              <div id="station-s4-map" id="station-s4-map" class="map"></div>
-          </div>
+        </div>
       </div>
-  </div>
+    </div>
+
+    <!-- Indicadores circulares -->
+    <div class="indicators">
+      <span class="indicator" data-index="0"></span>
+      <span class="indicator" data-index="1"></span>
+      <span class="indicator" data-index="2"></span>
+      <span class="indicator" data-index="3"></span>
+    </div>
   </div>
 
   <script type="module" src="js/app.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjef5LPJpnTuyq1sbBDKTkK9TGCyCV--Y&libraries=geometry,visualization" 
-  async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjef5LPJpnTuyq1sbBDKTkK9TGCyCV--Y&libraries=geometry,visualization" async defer></script>
 </body>
 </html>
