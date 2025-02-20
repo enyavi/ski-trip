@@ -31,6 +31,12 @@ const PLACES = [
         coordinates: { latitude: 42.7683, longitude: 0.5771 },
         id: "s4",
         url: "https://www.infonieve.es/estacion-esqui/luchon-superbagneres/"
+    },
+    {
+        name: "Grand Tourmalet",
+        coordinates: { latitude: 42.9105, longitude: 0.1711 },
+        id: "s5",
+        url: "https://www.infonieve.es/estacion-esqui/grand-tourmalet/"
     }
 ];
 

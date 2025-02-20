@@ -9,13 +9,27 @@ body {
 
 h1 {
   text-align: center;
-  margin: 20px auto; /* Centrado horizontalmente */
-  padding: 15px 30px; /* Espaciado interno */
+  margin: 10px auto; /* Centrado horizontalmente */
+  padding: 15px 20px; /* Espaciado interno */
   background-color: #ffffff; /* Fondo blanco */
   color: #333; /* Color del texto */
   border-radius: 20px; /* Bordes redondeados */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
   font-size: 2rem; /* Tamaño de fuente */
+  font-weight: bold; /* Texto en negrita */
+  max-width: 80%; /* Ancho máximo para que no ocupe toda la pantalla */
+  border: 1px solid #e0e0e0; /* Borde sutil */
+}
+
+h2 {
+  text-align: center;
+  margin: 10px auto; /* Centrado horizontalmente */
+  padding: 15px 30px; /* Espaciado interno */
+  background-color: #ffffff; /* Fondo blanco */
+  color: #333; /* Color del texto */
+  border-radius: 20px; /* Bordes redondeados */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  font-size: 1.4rem; /* Tamaño de fuente */
   font-weight: bold; /* Texto en negrita */
   max-width: 80%; /* Ancho máximo para que no ocupe toda la pantalla */
   border: 1px solid #e0e0e0; /* Borde sutil */
@@ -30,10 +44,6 @@ header {
 
 main {
   padding: 15px;
-}
-
-h1, h2 {
-  margin: 0 0 10px;
 }
 
 .card {
@@ -119,8 +129,8 @@ footer {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 10px 0;
-  font-size: 1.2rem;
+  padding: 5px 0;
+  font-size: 1.0rem;
   color: #333;
 }
 
@@ -164,7 +174,7 @@ footer {
 }
 
 .current-temp {
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: normal;
 }
 
